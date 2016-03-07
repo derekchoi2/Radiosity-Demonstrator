@@ -1,0 +1,63 @@
+WORLD room
+COMMENT light1
+light_1.ent
+< 0.05 0.8 1.0 >
+< 0.0 0.0 0.0 >
+< -7.0 -1.5 0.8 >
+COMMENT light2
+light_2.ent
+< 0.05 0.8 1.0 >
+< 0.0 0.0 0.0 >
+< 6.0 -1.5 0.8 >
+COMMENT floor
+floor.ent
+< 2.0 2.0 1.0 >
+< 0.0 0.0 0.0 >
+< -0.5 -0.6 0.0 >
+COMMENT ceiling
+ceiling.ent
+< 2.0 2.0 1.0 >
+< 0.0 0.0 0.0 >
+< -0.5 -0.6 1.0 >
+COMMENT farwall
+wall.ent
+< 2.0 2.0 1.0 >
+< 270.0 0.0 0.0 >
+< -0.5 -1.0 0.4 >
+COMMENT rightwall
+wall.ent
+< 2.0 2.0 1.0 >
+< 0.0 90.0 0.0 >
+< -1.0 -0.6 0.5 >
+COMMENT frontwall
+wall.ent
+< 2.0 2.0 1.0 >
+< 270.0 0.0 0.0 >
+< -0.5 -1.0 -0.9 >
+COMMENT leftwall
+wall.ent
+< 2.0 2.0 1.0 >
+< 0.0 270.0 0.0 >
+< 0.0 -0.6 0.5 >
+COMMENT chair
+chair.ent
+< 0.5 0.5 0.5 >
+< 0.0 0.0 60.0 >
+< -0.5 -1.3 0.0 >
+COMMENT picture
+picture.ent
+< 0.5 0.5 0.5 >
+< 0.0 90.0 0.0 >
+< -1.5 -1.25 1.89 >
+COMMENT sphere
+sphere.ent
+< 0.8 0.3 0.8 >
+< 0.0 0.0 135.0 >
+< 0.5 0.25 0.4 >
+COMMENT apple
+apple.ent
+< 0.12 0.12 0.12 >
+< 0.0 30.0 30.0 >
+< 0.0 3.0 3.0 >
+END_FILE
+
