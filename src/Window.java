@@ -115,13 +115,16 @@ public class Window extends JFrame implements ActionListener {
     }
 
     private void calculateRadiosity(){
+
+        //TODO radiosity calculations
+
         //first pass all exitance = [0,0,0] except lights
-        for (int i = 0; i < polyArrayList.size(); i++) {
-            for (int j = 0; j < polyArrayList.get(i).getSurfaces().size(); j++) {
-                for (int k = 0; k < polyArrayList.get(i).getSurfaces().get(j).getPatches().size(); k++) {
-                    for (int l = 0; l < polyArrayList.get(i).getSurfaces().get(j).getPatches().get(k).getElements().size(); l++) {
-                        float[] e = polyArrayList.get(i).getSurfaces().get(j).getReflectance();
-                        polyArrayList.get(i).getSurfaces().get(j).getPatches().get(k).getElements().get(l).setEmission(e);
+        for (Polygon aPolyArrayList : polyArrayList) {
+            for (int j = 0; j < aPolyArrayList.getSurfaces().size(); j++) {
+                for (int k = 0; k < aPolyArrayList.getSurfaces().get(j).getPatches().size(); k++) {
+                    for (int l = 0; l < aPolyArrayList.getSurfaces().get(j).getPatches().get(k).getElements().size(); l++) {
+                        float[] e = aPolyArrayList.getSurfaces().get(j).getReflectance();
+                        aPolyArrayList.getSurfaces().get(j).getPatches().get(k).getElements().get(l).setEmission(e);
                     }
                 }
             }

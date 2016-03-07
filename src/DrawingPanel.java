@@ -86,7 +86,7 @@ class DrawingPanel extends GLJPanel {
 
                                         //set color of element
                                         float[] eleEmission = element.getEmission();
-                                        gl.glColor3f(eleEmission[0], eleEmission[1], eleEmission[2]);//TODO
+                                        gl.glColor3f(eleEmission[0], eleEmission[1], eleEmission[2]);
 
                                         //draw vertices as quad
                                         gl.glBegin(GL2.GL_QUADS);
