@@ -1,4 +1,3 @@
-# radiosity
-Radiosity Demonstrator
+# Radiosity Demonstrator
 
 Final Year University Project
