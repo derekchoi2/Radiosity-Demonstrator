@@ -27,7 +27,7 @@ class DrawingPanel extends GLJPanel {
                 glu.gluQuadricDrawStyle(quad, GLU.GLU_LINE);
 
                 //gl.glClearColor(1.0f, 1.0f, 1.0f, 0.0f); //white background
-                gl.glClearColor(0f,0f,0f,0f); //black background
+                gl.glClearColor(0f, 0f, 0f, 0f); //black background
                 gl.glShadeModel(GL2.GL_SMOOTH);
 
                 gl.glClearDepth(1.0f); //depth buffer setup
@@ -89,12 +89,18 @@ class DrawingPanel extends GLJPanel {
                                         gl.glColor3f(eleEmission[0], eleEmission[1], eleEmission[2]);
 
                                         //draw vertices as quad
-                                        gl.glBegin(GL2.GL_QUADS);
+                                        gl.glBegin(GL2.GL_LINE_LOOP);
                                         for (int k = 0; k < element.getVertices().length; k++) {
                                             Vertex v = element.getVertices()[k]; //get each vertex
                                             //plot vertex
                                             gl.glVertex3f(v.getX(), v.getY(), v.getZ());
                                         }
+                                        gl.glEnd();
+
+                                        gl.glBegin(GL2.GL_LINES);
+                                        Vertex v = element.getVertices()[0];
+                                        gl.glVertex3f(v.getX(),v.getY(),v.getZ());
+                                        gl.glVertex3f(v.getX()+(element.getNormal()[0]*10), v.getY()+(element.getNormal()[1]*10), v.getZ()+(element.getNormal()[2]*10));
                                         gl.glEnd();
                                     }
                                 }
@@ -128,4 +134,26 @@ class DrawingPanel extends GLJPanel {
         });
 
     }
+
+    public void calculateRadiosity() {
+
+        //TODO radiosity calculations
+
+        //first render, all exitance = [0,0,0] except lights
+        for (Polygon p : Window.polyArrayList) {
+            for (int j = 0; j < p.getSurfaces().size(); j++) {
+                for (int k = 0; k < p.getSurfaces().get(j).getPatches().size(); k++) {
+                    for (int l = 0; l < p.getSurfaces().get(j).getPatches().get(k).getElements().size(); l++) {
+                        float[] e = p.getSurfaces().get(j).getReflectance();
+                        p.getSurfaces().get(j).getPatches().get(k).getElements().get(l).setEmission(e);
+
+                        //camera to middle of patch
+
+
+                    }
+                }
+            }
+        }
+    }
+
 }

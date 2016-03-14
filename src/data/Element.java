@@ -9,13 +9,24 @@ public class Element {
     float[] reflectance = new float[3];
     float[] exitance;
     float[] emission;
+    float[] incident;
+    float[] normal = new float[3];
 
-    public Element(Vertex[] vertices, float[] reflectance, float[] exitance, float[] emission){
+    public Element(Vertex[] vertices, float[] reflectance, float[] exitance, float[] emission, float[] incident){
 
         this.vertices = vertices;
         this.reflectance = reflectance;
         this.exitance = exitance;
         this.emission = emission;
+        this.incident = incident;
+
+        //calculate surface normal
+        //https://www.opengl.org/wiki/Calculating_a_Surface_Normal
+        Vertex u = vertices[1].minus(vertices[0]);
+        Vertex v = vertices[2].minus(vertices[0]);
+        normal[0] = (u.getY() * v.getZ()) - (u.getZ() * v.getY());
+        normal[1] = (u.getZ() * v.getX()) - (u.getX() * v.getZ());
+        normal[2] = (u.getX() * v.getY()) - (u.getY() * v.getX());
 
     }
 
@@ -34,5 +45,13 @@ public class Element {
     public float[] getEmission() { return emission; }
 
     public void setEmission(float[] emission) { this.emission = emission; }
+
+    public float[] getIncident() { return incident; }
+
+    public void setIncident(float[] incident) { this.incident = incident; }
+
+    public float[] getNormal() { return normal; }
+
+    public void setNormal(float[] normal) { this.normal = normal; }
 
 }

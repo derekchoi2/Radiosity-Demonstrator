@@ -1,6 +1,7 @@
 import data.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -103,13 +104,13 @@ public class Parser {
                         float[] reflectance = surfaces.get(patches.get(patchIndex).getSurfaceIndex()).getReflectance();
                         float[] emission;
                         //set emission to exitance if light, otherwise 0
-                        if (exitance == new float[]{0,0,0}){
+                        if (equals(exitance, new float[]{0,0,0})){
                             emission = new float[]{0,0,0};
                         } else {
                             emission = exitance;
                         }
                         //set initial reflectance and exitance of elements to surface reflectance and exitance
-                        patches.get(patchIndex).addElement(new Element(getVertices(line), reflectance, exitance, emission));
+                        patches.get(patchIndex).addElement(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
                     }
                 }
 
@@ -168,5 +169,15 @@ public class Parser {
             v[i] = Window.polyArrayList.get(noOfPolygons).getVertices().get(nextInt);
         }
         return v;
+    }
+
+    private boolean equals(float[] a, float[] b){
+        if (a.length != b.length){ return false; }
+        else{
+            for (int i = 0; i < a.length; i++){
+                if (a[i] != b[i]){ return false; }
+            }
+            return true;
+        }
     }
 }
