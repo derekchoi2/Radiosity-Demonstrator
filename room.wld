@@ -3,12 +3,12 @@ COMMENT light1
 light_1.ent
 < 0.05 0.8 1.0 >
 < 0.0 0.0 0.0 >
-< -7.0 -1.5 0.8 >
+< -7.0 -0.8 0.9 >
 COMMENT light2
 light_2.ent
 < 0.05 0.8 1.0 >
 < 0.0 0.0 0.0 >
-< 6.0 -1.5 0.8 >
+< 6.0 -0.8 0.9 >
 COMMENT floor
 floor.ent
 < 2.0 2.0 1.0 >
@@ -17,28 +17,28 @@ floor.ent
 COMMENT ceiling
 ceiling.ent
 < 2.0 2.0 1.0 >
-< 0.0 0.0 0.0 >
-< -0.5 -0.6 1.0 >
+< 0.0 180.0 0.0 >
+< -0.5 -0.6 -1.0 >
 COMMENT farwall
 wall.ent
 < 2.0 2.0 1.0 >
-< 270.0 0.0 0.0 >
-< -0.5 -1.0 0.4 >
+< 90.0 0.0 0.0 >
+< -0.5 0.0 -0.4 >
 COMMENT rightwall
 wall.ent
 < 2.0 2.0 1.0 >
-< 0.0 90.0 0.0 >
-< -1.0 -0.6 0.5 >
+< 0.0 270.0 0.0 >
+< 0.0 -0.6 -0.5 >
 COMMENT frontwall
 wall.ent
 < 2.0 2.0 1.0 >
 < 270.0 0.0 0.0 >
-< -0.5 -1.0 -0.9 >
+< -0.5 -1.0 -0.6 >
 COMMENT leftwall
 wall.ent
 < 2.0 2.0 1.0 >
-< 0.0 270.0 0.0 >
-< 0.0 -0.6 0.5 >
+< 0.0 90.0 0.0 >
+< -1.0 -0.6 -0.5 >
 COMMENT chair
 chair.ent
 < 0.5 0.5 0.5 >
@@ -47,8 +47,8 @@ chair.ent
 COMMENT picture
 picture.ent
 < 0.5 0.5 0.5 >
-< 0.0 90.0 0.0 >
-< -1.5 -1.25 1.89 >
+< 0.0 270.0 0.0 >
+< 0.5 -1.25 -1.95 >
 COMMENT sphere
 sphere.ent
 < 0.8 0.3 0.8 >

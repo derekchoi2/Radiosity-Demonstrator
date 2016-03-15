@@ -24,6 +24,10 @@ public class Parser {
             ArrayList<Vertex> vertices;
             ArrayList<Patch> patches;
             ArrayList<Surface> surfaces;
+            float[] scale = new float[3];
+            float[] rotation = new float[3];
+            float[] translation = new float[3];
+            int faceindex = 0;
 
             String comment = "";
 
@@ -34,21 +38,32 @@ public class Parser {
                     if (line.startsWith("<")) {
                         counter++;
                         float[] result = createArray(line, 2);
-                        Polygon polygon = Window.polyArrayList.get(noOfPolygons);
+                        Polygon polygon = Window.polyArrayList.get(noOfPolygons - 1);
+
                         switch (counter) {
                             case 1: polygon.setScale(result);
+                                    scale = result;
                                     break;
                             case 2: polygon.setRotation(result);
+                                    rotation = result;
                                     break;
                             case 3: polygon.setTranslation(result);
-                                    noOfPolygons++;
+                                    translation = result;
+                                    for (int i = faceindex; i < Window.faces.size(); i++){
+                                        Window.faces.get(i).setScale(scale);
+                                        Window.faces.get(i).setRotation(rotation);
+                                        Window.faces.get(i).setTranslation(translation);
+                                        Window.faces.get(i).setComment(comment);
+                                    }
+                                    polygon.setComment(comment);
                                     break;
                         }
-                        polygon.setComment(comment);
                     } else if (line.contains(".ent")){
                         //new parser for each entity file
-                        new Parser(new File(System.getProperty("user.dir"),line));
                         counter = 0;
+                        faceindex = Window.faces.size();
+                        new Parser(new File(System.getProperty("user.dir"),line));
+
                     } else if (line.contains("COMMENT")){
                             String[] s = line.split(" ");
                             comment = s[1];
@@ -71,6 +86,7 @@ public class Parser {
                         vertexFlag = true;
                     } else if (line.contentEquals("END_VERT")) {
                         vertexFlag = false;
+                        noOfPolygons++;
                         Window.polyArrayList.add(new Polygon(vertices));
                     }
 
@@ -111,6 +127,7 @@ public class Parser {
                         }
                         //set initial reflectance and exitance of elements to surface reflectance and exitance
                         patches.get(patchIndex).addElement(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
+                        Window.faces.add(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
                     }
                 }
 
@@ -120,7 +137,9 @@ public class Parser {
                     surfaces.get(surfaceIndex).addPatch(patches.get(i));
 
                 }
-                Window.polyArrayList.get(noOfPolygons).setSurfaces(surfaces);
+                Window.polyArrayList.get(noOfPolygons - 1).setSurfaces(surfaces);
+
+
             }
 
         } catch (FileNotFoundException e){
@@ -132,6 +151,7 @@ public class Parser {
             System.exit(1);
         } catch (Exception e){
             System.out.println("Unknown Parser Exception");
+            System.out.println(e);
             System.exit(1);
         }
     }
@@ -166,7 +186,7 @@ public class Parser {
         Scanner scanner = new Scanner(s.substring(startIndex+2));
         for (int i = 0; i < 4; i++){
             int nextInt = scanner.nextInt();
-            v[i] = Window.polyArrayList.get(noOfPolygons).getVertices().get(nextInt);
+            v[i] = Window.polyArrayList.get(noOfPolygons - 1).getVertices().get(nextInt);
         }
         return v;
     }
@@ -180,4 +200,23 @@ public class Parser {
             return true;
         }
     }
+
+    private float[][] multiply(float[][] a, float[][] b){
+        int aRows = a.length;
+        int aColumns = a[0].length;
+        int bRows = b.length;
+        int bColumns = b[0].length;
+
+        float[][] output = new float[aRows][bColumns];
+        for (int i = 0; i < aRows; i++){
+           for (int j = 0; j < bColumns; j++){
+               for (int k = 0; k < aColumns; k++){
+                   output[i][j] += a[i][k] * b[k][j];
+               }
+           }
+        }
+
+        return output;
+    }
+
 }

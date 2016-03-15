@@ -11,6 +11,10 @@ public class Element {
     float[] emission;
     float[] incident;
     float[] normal = new float[3];
+    float[] translation;
+    float[] rotation;
+    float[] scale;
+    String comment;
 
     public Element(Vertex[] vertices, float[] reflectance, float[] exitance, float[] emission, float[] incident){
 
@@ -54,4 +58,19 @@ public class Element {
 
     public void setNormal(float[] normal) { this.normal = normal; }
 
+    public float[] getTranslation() { return translation; }
+
+    public void setTranslation(float[] translation) { this.translation = translation; }
+
+    public float[] getRotation() { return rotation; }
+
+    public void setRotation(float[] rotation) { this.rotation = rotation; }
+
+    public float[] getScale() { return scale; }
+
+    public void setScale(float[] scale) { this.scale = scale; }
+
+    public String getComment() { return comment; }
+
+    public void setComment(String comment) { this.comment = comment; }
 }

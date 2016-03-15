@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class Window extends JFrame implements ActionListener {
 
     public static ArrayList<Polygon> polyArrayList = new ArrayList<>();
+    public static ArrayList<Element> faces = new ArrayList<>();
+
     JPanel northPanel = new JPanel();
     JPanel southPanel = new JPanel();
 
@@ -69,7 +71,7 @@ public class Window extends JFrame implements ActionListener {
             }
         });
 
-        setSize(1000,1000);
+        setSize(800,800);
         setResizable(false);
         setVisible(true);
     }
