@@ -20,6 +20,9 @@ public class Window extends JFrame implements ActionListener {
 
     public static ArrayList<Polygon> polyArrayList = new ArrayList<>();
     public static ArrayList<Element> faces = new ArrayList<>();
+    public static ArrayList<int[]> facesColorCode = new ArrayList<>();
+    public static float[][] formFactors;
+    public static ArrayList<float[]> radiosities = new ArrayList<>();
 
     JPanel northPanel = new JPanel();
     JPanel southPanel = new JPanel();
@@ -29,7 +32,7 @@ public class Window extends JFrame implements ActionListener {
     JFileChooser fileChooser;
     JLabel label;
     DrawingPanel dp;
-    int pass = 0;
+    public static int pass = 0;
     JLabel passText;
 
     public static void main(String args[]) {
@@ -101,19 +104,16 @@ public class Window extends JFrame implements ActionListener {
             pass++;
             passText.setText("Pass: " + pass);
 
-            dp.calculateRadiosity();
-            redraw();
+            //redraw scene
+            remove(dp);
+            dp = new DrawingPanel();
+            dp.calculateRadiosities();
+            add(dp, BorderLayout.CENTER);
 
             southPanel.add(passText, BorderLayout.WEST);
             setVisible(false);
             setVisible(true);
         }
-    }
-
-    private void redraw(){
-        remove(dp);
-        dp = new DrawingPanel();
-        add(dp, BorderLayout.CENTER);
     }
 
 }

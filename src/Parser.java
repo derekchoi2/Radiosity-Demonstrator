@@ -128,6 +128,8 @@ public class Parser {
                         //set initial reflectance and exitance of elements to surface reflectance and exitance
                         patches.get(patchIndex).addElement(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
                         Window.faces.add(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
+                        Window.facesColorCode.add(encodeColor(Window.faces.size()-1));
+                        Window.radiosities.add(new float[]{0.5f, 0.5f, 0.5f});
                     }
                 }
 
@@ -191,7 +193,7 @@ public class Parser {
         return v;
     }
 
-    private boolean equals(float[] a, float[] b){
+    public static boolean equals(float[] a, float[] b){
         if (a.length != b.length){ return false; }
         else{
             for (int i = 0; i < a.length; i++){
@@ -201,22 +203,13 @@ public class Parser {
         }
     }
 
-    private float[][] multiply(float[][] a, float[][] b){
-        int aRows = a.length;
-        int aColumns = a[0].length;
-        int bRows = b.length;
-        int bColumns = b[0].length;
-
-        float[][] output = new float[aRows][bColumns];
-        for (int i = 0; i < aRows; i++){
-           for (int j = 0; j < bColumns; j++){
-               for (int k = 0; k < aColumns; k++){
-                   output[i][j] += a[i][k] * b[k][j];
-               }
-           }
-        }
-
-        return output;
+    private int[] encodeColor(int f){
+        int[] code = new int[3];
+        f++; //take care of 0 based indexing of faces
+        code[0] = f % 256;
+        code[1] = (f >> 8) % 256;
+        code[2] = (f >> 16) % 256;
+        return code;
     }
 
 }
