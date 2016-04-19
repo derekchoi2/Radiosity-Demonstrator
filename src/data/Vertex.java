@@ -30,12 +30,4 @@ public class Vertex {
     public String toString(){
         return x + " " + y + " " + z;
     }
-
-    //for calculating normals
-    public Vertex minus(Vertex v){
-        float newX = x - v.getX();
-        float newY = y - v.getY();
-        float newZ = z - v.getZ();
-        return new Vertex(newX, newY, newZ);
-    }
 }
