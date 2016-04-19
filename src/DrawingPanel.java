@@ -4,7 +4,6 @@ import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.GLUquadric;
 import data.*;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 
 
 class DrawingPanel extends GLJPanel {

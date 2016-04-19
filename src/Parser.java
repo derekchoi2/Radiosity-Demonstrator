@@ -1,15 +1,9 @@
 import data.*;
-
 import javax.swing.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
-/**
- * Created by derek on 05/11/2015.
- */
 public class Parser {
 
     static int noOfPolygons = 0; //count how many polygons entered so far
@@ -27,7 +21,7 @@ public class Parser {
             ArrayList<Surface> surfaces;
             float[] scale = new float[3];
             float[] rotation = new float[3];
-            float[] translation = new float[3];
+            float[] translation;
             int faceindex = 0;
 
             String comment = "";
@@ -63,7 +57,7 @@ public class Parser {
                         //new parser for each entity file
                         counter = 0;
                         faceindex = Window.faces.size();
-                        new Parser(new File(System.getProperty("user.dir"),line));
+                        new Parser(new File(file.getParent(),line));
 
                     } else if (line.contains("COMMENT")){
                             String[] s = line.split(" ");
