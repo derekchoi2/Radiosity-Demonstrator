@@ -1,6 +1,7 @@
 import data.*;
 import data.Polygon;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
 import java.awt.*;
 import java.io.File;
@@ -24,8 +25,6 @@ public class Window extends JFrame implements ActionListener {
     DrawingPanel dp;
     public static int pass = 0;
     JLabel passText;
-
-    JDialog dialog;
 
     public static void main(String args[]) {
         new Window();
@@ -73,6 +72,9 @@ public class Window extends JFrame implements ActionListener {
 
         if (widget == fileChooserButton) {
             fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".wld Files", "wld");
+            fileChooser.setFileFilter(filter);
+
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             File workingDirectory = new File(System.getProperty("user.dir")); //makes starting directory where the program is run from
             fileChooser.setCurrentDirectory(workingDirectory);

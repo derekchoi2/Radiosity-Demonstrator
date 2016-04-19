@@ -187,7 +187,7 @@ public class Parser {
         return v;
     }
 
-    public static boolean equals(float[] a, float[] b){
+    private boolean equals(float[] a, float[] b){
         if (a.length != b.length){ return false; }
         else{
             for (int i = 0; i < a.length; i++){
