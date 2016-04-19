@@ -27,10 +27,6 @@ public class Vertex {
         return z;
     }
 
-    public float[] getAll(){
-        return new float[]{x,y,z};
-    }
-
     public String toString(){
         return x + " " + y + " " + z;
     }
@@ -42,11 +38,4 @@ public class Vertex {
         float newZ = z - v.getZ();
         return new Vertex(newX, newY, newZ);
     }
-
-    public void setVertices(float x, float y, float z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
 }
