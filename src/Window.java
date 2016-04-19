@@ -35,11 +35,10 @@ public class Window extends JFrame implements ActionListener {
     public static int pass = 0;
     JLabel passText;
 
+    JDialog dialog;
+
     public static void main(String args[]) {
-        //Gui gui = new Gui();
-
         new Window();
-
     }
 
     public Window(){
@@ -83,28 +82,26 @@ public class Window extends JFrame implements ActionListener {
         Object widget = e.getSource();
 
         if (widget == fileChooserButton) {
-//            fileChooser = new JFileChooser();
-//            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//            File workingDirectory = new File(System.getProperty("user.dir")); //makes starting directory where the program is run from
-//            fileChooser.setCurrentDirectory(workingDirectory);
-//            int returnVal = fileChooser.showOpenDialog(this);
-//            if (returnVal == JFileChooser.APPROVE_OPTION){
+            fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            File workingDirectory = new File(System.getProperty("user.dir")); //makes starting directory where the program is run from
+            fileChooser.setCurrentDirectory(workingDirectory);
+            int returnVal = fileChooser.showOpenDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION){
                 northPanel.setVisible(false);
-                //File file = fileChooser.getSelectedFile();
-                File file = new File("room.wld");
+                File file = fileChooser.getSelectedFile();
                 new Parser(file);
                 dp = new DrawingPanel();
                 add(dp, BorderLayout.CENTER);
-
                 southPanel.setVisible(true);
-            //}
+            }
 
         } else if(widget == nextPass){
+            //calculate next iteration, update pass count and refresh display
             southPanel.remove(passText);
             pass++;
             passText.setText("Pass: " + pass);
 
-            //redraw scene
             remove(dp);
             dp = new DrawingPanel();
             dp.calculateRadiosities();

@@ -1,5 +1,6 @@
 import data.*;
 
+import javax.swing.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -126,10 +127,9 @@ public class Parser {
                             emission = exitance;
                         }
                         //set initial reflectance and exitance of elements to surface reflectance and exitance
-                        patches.get(patchIndex).addElement(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
-                        Window.faces.add(new Element(getVertices(line), reflectance, exitance, emission, new float[]{0,0,0}));
+                        Window.faces.add(new Element(getVertices(line), reflectance, exitance, emission));
                         Window.facesColorCode.add(encodeColor(Window.faces.size()-1));
-                        Window.radiosities.add(new float[]{0.5f, 0.5f, 0.5f});
+                        Window.radiosities.add(new float[]{0f, 0f, 0f});
                     }
                 }
 
@@ -139,21 +139,21 @@ public class Parser {
                     surfaces.get(surfaceIndex).addPatch(patches.get(i));
 
                 }
-                Window.polyArrayList.get(noOfPolygons - 1).setSurfaces(surfaces);
 
 
             }
 
         } catch (FileNotFoundException e){
             System.out.println("File not Found");
+            JOptionPane.showMessageDialog(null, "File not found", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
 
         } catch (IOException e){
             System.out.println("IO Exception");
+            JOptionPane.showMessageDialog(null, "IO Exception", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         } catch (Exception e){
-            System.out.println("Unknown Parser Exception");
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
