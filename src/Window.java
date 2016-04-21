@@ -52,7 +52,7 @@ public class Window extends JFrame implements ActionListener {
         slider = new JSlider(JSlider.HORIZONTAL, 4, 256, 128);
         slider.addChangeListener(new SliderListener());
         northPanelSouth.add(slider);
-        valueLabel = new JLabel("" + hemiRes);
+        valueLabel = new JLabel(hemiRes + "x" + hemiRes);
         northPanelSouth.add(valueLabel);
 
         label = new JLabel("Select a File: ");
@@ -91,7 +91,7 @@ public class Window extends JFrame implements ActionListener {
             JSlider source = (JSlider) e.getSource();
                 hemiRes = source.getValue();
                 northPanelSouth.remove(valueLabel);
-                valueLabel = new JLabel("" + hemiRes);
+                valueLabel = new JLabel(hemiRes + "x" + hemiRes);
                 northPanelSouth.add(valueLabel);
                 northPanelSouth.setVisible(false);
                 northPanelSouth.setVisible(true);
