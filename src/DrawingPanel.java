@@ -3,15 +3,21 @@ import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.GLUquadric;
 import data.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.nio.ByteBuffer;
 
 
 class DrawingPanel extends GLJPanel {
     GLU glu;
     GLUquadric quad;
+    int hemicubeResolution;
 
-    DrawingPanel() {
+    DrawingPanel(int hemiRes) {
         super(new GLCapabilities((GLProfile.getDefault())));
+
+        hemicubeResolution = hemiRes;
 
         this.addGLEventListener(new GLEventListener() {
             @Override
@@ -34,11 +40,20 @@ class DrawingPanel extends GLJPanel {
                 gl.glCullFace(GL.GL_BACK);
 
                 //if first pass calculate world coordinates then form factors
-                if (Window.pass == 0) {
+                if (Window.newFile) {
                     for (int i = 0; i < Window.faces.size(); i++) {
                         Window.faces.get(i).calculateWorldCoordinates();
                     }
                     calculateFormFactors(drawable);
+
+                    //set calculation time and show hemicube resolution
+                    Window.duration = System.currentTimeMillis() - Window.startTime;
+                    Window.durationLabel = new JLabel("Calculation time: " + Window.duration/1000 + " seconds. Hemicube Resolution: " + hemicubeResolution + ". Total Faces: " + Window.faces.size());
+                    Window.southPanel.add(Window.durationLabel, BorderLayout.WEST);
+                    Window.southPanel.setVisible(false);
+                    Window.southPanel.setVisible(true);
+
+                    Window.newFile = false;
                 }
             }
 
@@ -100,7 +115,6 @@ class DrawingPanel extends GLJPanel {
     }
 
     public void calculateFormFactors(GLAutoDrawable drawable) {
-        int hemicubeResolution = 128;
 
         GL2 gl = drawable.getGL().getGL2();
 
@@ -150,7 +164,7 @@ class DrawingPanel extends GLJPanel {
             float[] d1 = {face.getWorld()[maxDistanceIndex].getX(), face.getWorld()[maxDistanceIndex].getY(), face.getWorld()[maxDistanceIndex].getZ()};
             float[] d2 = new float[3];
             //normalise d1
-            double magnitude = Math.sqrt((double)(d1[0] * d1[0] + d1[1] * d1[1] + d1[2] * d1[2]));
+            double magnitude = Math.sqrt((double) (d1[0] * d1[0] + d1[1] * d1[1] + d1[2] * d1[2]));
             if (magnitude != 0) {
                 d1[0] /= magnitude;
                 d1[1] /= magnitude;
@@ -162,7 +176,9 @@ class DrawingPanel extends GLJPanel {
                 d2[0] = ox;
                 d2[1] = oy;
                 d2[2] = oz;
-            } else { d2 = d1; }
+            } else {
+                d2 = d1;
+            }
 
             //half length of the unit hemicube
             float r = 0.5f;
@@ -348,7 +364,7 @@ class DrawingPanel extends GLJPanel {
                 float g2 = g1 + Window.radiosities.get(i)[1];
                 float b2 = b1 + Window.radiosities.get(i)[2];
 
-                Window.faces.get(i).setExitance(new float[]{r2*50,g2*50,b2*50});
+                Window.faces.get(i).setExitance(new float[]{r2 * 50, g2 * 50, b2 * 50});
                 Window.radiosities.set(i, new float[]{r2, g2, b2});
             }
         }
