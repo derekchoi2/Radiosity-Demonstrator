@@ -268,9 +268,9 @@ class DrawingPanel extends GLJPanel {
                 //count pixels for this face of hemicube
                 for (int h = 0; h < viewHeight; h++) {
                     for (int w = 0; w < viewWidth; w++) {
-                        byte bR = buffer.duplicate().get((int) (h * viewWidth + w) * 3);
-                        byte bG = buffer.duplicate().get((int) (h * viewWidth + w) * 3 + 1);
-                        byte bB = buffer.duplicate().get((int) (h * viewWidth + w) * 3 + 2);
+                        byte bR = buffer.get((int) (h * viewWidth + w) * 3);
+                        byte bG = buffer.get((int) (h * viewWidth + w) * 3 + 1);
+                        byte bB = buffer.get((int) (h * viewWidth + w) * 3 + 2);
 
                         float cR = Byte.toUnsignedInt(bR);
                         float cG = Byte.toUnsignedInt(bG);
