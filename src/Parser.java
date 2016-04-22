@@ -2,6 +2,7 @@ import data.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Parser {
@@ -138,16 +139,16 @@ public class Parser {
             }
 
         } catch (FileNotFoundException e){
-            System.out.println("File not Found");
             JOptionPane.showMessageDialog(null, "File not found", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
-
         } catch (IOException e){
-            System.out.println("IO Exception");
             JOptionPane.showMessageDialog(null, "IO Exception", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
+        } catch(InputMismatchException e){
+            JOptionPane.showMessageDialog(null, "Error in input file. " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Unknown Error: " + e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }

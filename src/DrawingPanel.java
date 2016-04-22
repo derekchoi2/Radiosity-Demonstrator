@@ -49,7 +49,6 @@ class DrawingPanel extends GLJPanel {
 
                     //set calculation time and show hemicube resolution
                     Window.duration = System.currentTimeMillis() - Window.startTime;
-                    System.out.println((double) Window.duration/1000);
                     Window.durationLabel = new JLabel("  Time Taken: " + (double) Window.duration/1000 + " seconds     Patches: " + Window.faces.size() + "     Hemicube Resolution: " + hemicubeResolution + "x" + hemicubeResolution + "     ");
                     Window.southPanel.add(Window.durationLabel, BorderLayout.WEST);
                     Window.southPanel.setVisible(false);
