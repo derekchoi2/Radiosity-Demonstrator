@@ -1,3 +1,3 @@
 # Radiosity Demonstrator
 
-Final Year University Project
+BSc Computer Science Final Year Project
